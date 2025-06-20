@@ -1,0 +1,26 @@
+- description: deserialization driven controllability analysis
+  analysisClass: pascal.taie.analysis.dataflow.analysis.SummaryAnalysisDriver
+  id: method-summary
+  requires: [cfg]
+  options:
+    distinguish-string-constants: reflection # (distinguish reflection-relevant
+    merge-string-objects: true
+    merge-string-builders: true
+    merge-exception-objects: true
+    priori-knowledge: null # path to config file of taint analysis
+    neo4j-dbpath: null # path to store the csv
+
+- description: throw analysis
+  analysisClass: pascal.taie.analysis.exception.ThrowAnalysis
+  id: throw
+  options:
+    exception: explicit # | all (includes implicit and explicit exceptions)
+    algorithm: intra # | pta (pointer analysis based throw analysis)
+
+- description: intraprocedural control-flow graph
+  analysisClass: pascal.taie.analysis.graph.cfg.CFGBuilder
+  id: cfg
+  requires: [throw]
+  options:
+    exception: explicit # | null | all (includes implicit and explicit exceptions)
+    dump: false # dump control-flow graph

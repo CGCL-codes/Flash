@@ -1,0 +1,201 @@
+sinks:
+  - { method: "<javax.naming.InitialContext: java.lang.Object lookup(java.lang.String)>", index: [0] }
+  - { method: "<javax.naming.InitialContext: java.lang.Object lookup(javax.naming.Name)>", index: [0] }
+  - { method: "<com.sun.jndi.ldap.LdapCtx: java.lang.Object c_lookup(javax.naming.Name,com.sun.jndi.toolkit.ctx.Continuation)>", index: [base] }
+  - { method: "<org.springframework.jndi.JndiTemplate: java.lang.Object lookup(java.lang.String)>", index: [0] }
+  - { method: "<java.lang.Class: java.lang.Object newInstance()>", index: [base] }
+  - { method: "<java.lang.ProcessBuilder: java.lang.Process start()>", index: [base] }
+  - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String)>", index: [0] }
+  - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String[])>", index: [0] }
+  - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String,java.lang.String[],java.io.File)>", index: [0] }
+  - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String[],java.lang.String[],java.io.File)>", index: [0] }
+  - { method: "<java.io.OutputStream: void write(byte[])>", index: [base,0] }
+  - { method: "<java.io.OutputStream: void write(byte[],int,int)>", index: [base,0] }
+  - { method: "<java.io.File: boolean delete()>", index: [base] }
+  - { method: "<java.io.FileOutputStream: void write(byte[])>", index: [base,0] }
+  - { method: "<java.io.FileInputStream: int read(byte[],int,int)>", index: [base] }
+  - { method: "<java.net.URLClassLoader: java.net.URLClassLoader newInstance(java.net.URL[],java.lang.ClassLoader)>", index: [ 0 ] }
+  - { method: "<java.net.URLClassLoader: java.net.URLClassLoader newInstance(java.net.URL[])>", index: [ 0 ] }
+  - { method: "<java.net.URLClassLoader: java.lang.Class findClass(java.lang.String)>", index: [-1,0] }
+  - { method: "<java.sql.DriverManager: java.sql.Connection getConnection(java.lang.String,java.util.Properties,java.lang.Class)>", index: [ 0 ] }
+  - { method: "<java.net.URL: java.net.URLConnection openConnection()>", index: [ base ] }
+  - { method: "<javax.naming.spi.NamingManager: javax.naming.spi.ObjectFactory getObjectFactoryFromReference(javax.naming.Reference,java.lang.String)>", index: [ 0 ] }
+  - { method: "<sun.rmi.transport.tcp.TCPTransport: void listen()>", index: [base]}
+  - { method: "<java.lang.ClassLoader: java.lang.Class loadClass(java.lang.String)>", index: [base, 0]} # BCEL
+  - { method: "<java.lang.ClassLoader: java.lang.Class loadClass(java.lang.String,boolean)>", index: [base, 0]}
+  - { method: "<java.lang.Class: java.lang.Class forName(java.lang.String,boolean,java.lang.ClassLoader)>", index: [0,2]}
+  - { method: "<javax.el.ValueExpression: java.lang.Object getValue(javax.el.ELContext)>", index: [base]}
+  - { method: "<clojure.lang.Compiler: java.lang.Object eval(java.lang.Object)>", index: [0]}
+  - { method: "<javax.script.ScriptEngineManager: void <init>(java.lang.ClassLoader)>", index: [0]}
+  - { method: "<org.python.core.PyBaseCode: org.python.core.PyObject call(org.python.core.ThreadState,org.python.core.PyObject[],java.lang.String[],org.python.core.PyObject,org.python.core.PyObject[],org.python.core.PyObject)>", index: [base,1] }
+#  - { method: "<org.yaml.snakeyaml.Yaml: java.lang.Object load(java.lang.String)>", index: [0]} # comment this if analyze SnakeYaml
+
+transfers:
+  - { method: "<java.io.File: java.lang.String getAbsolutePath()>", from: base, to: result }
+  - { method: "<java.io.File: java.io.File createTempFile(java.lang.String,java.lang.String,java.io.File)>", from: 0, to: result }
+  - { method: "<java.nio.file.Files: java.io.InputStream newInputStream(java.nio.file.Path,java.nio.file.OpenOption[])>", from: 0, to: result }
+  - { method: "<java.nio.file.Files: java.io.OutputStream newOutputStream(java.nio.file.Path,java.nio.file.OpenOption[])>", from: 0, to: result }
+  - { method: "<java.nio.file.Files: java.io.BufferedReader newBufferedReader(java.nio.file.Path,java.nio.charset.Charset)>", from: 0, to: result }
+  - { method: "<java.nio.file.Files: java.io.BufferedWriter newBufferedWriter(java.nio.file.Path,java.nio.charset.Charset,java.nio.file.OpenOption[])>", from: 0, to: result }
+  - { method: "<java.io.InputStream: int read(byte[])>", from: base, to : 0 }
+  - { method: "<java.io.ObjectInput: java.lang.Object readObject()>", from: base, to: result }
+  - { method: "<java.io.ObjectInputStream: java.lang.Object readUnshared()>", from: base, to: result }
+  - { method: "<java.io.ObjectInputStream: java.lang.Object readObject()>", from: base, to: result }
+  - { method: "<java.io.ObjectInputStream: java.lang.Object readOrdinaryObject(boolean)>", from: base, to: result }
+  - { method: "<java.io.ObjectInputStream: java.lang.Object readArray(boolean)>", from: base, to: result }
+  - { method: "<java.io.ObjectInputStream: java.lang.String readString(boolean)>", from: base, to: result }
+  - { method: "<java.io.ObjectInputStream: java.lang.String readLine()>", from: base, to: result }
+  - { method: "<java.io.ObjectInputStream: java.lang.String readUTF()>", from: base, to: result }
+  - { method: "<java.io.ObjectInputStream: char readChar()>", from: base, to: result }
+  - { method: "<java.io.ObjectInputStream: byte readByte()>", from: base, to: result }
+  - { method: "<java.io.ObjectInputStream: void readFully(byte[],int,int)>", from: base, to: 0 }
+  - { method: "<java.io.DataInputStream: void readFully(byte[],int,int)>", from: base, to: 0 }
+  - { method: "<java.io.DataInputStream: void readFully(byte[])>", from: base, to: 0 }
+  - { method: "<java.io.ObjectInputStream: void readFully(byte[])>", from: base, to: 0 }
+  - { method: "<java.io.ObjectInputStream: int read(byte[],int,int)>", from: base, to: 0 }
+  - { method: "<java.io.ObjectInputStream: java.io.ObjectInputStream$GetField readFields()>", from: base, to: result }
+  - { method: "<java.io.ObjectInputStream$GetField: java.lang.Object get(java.lang.String,java.lang.Object)>", from: base, to: result }
+  - { method: "<java.lang.Class: java.lang.reflect.Field[] getFields()>", from: base, to: result }
+  - { method: "<java.lang.Class: java.lang.reflect.Constructor[] getDeclaredConstructors()>", from: base, to: result }
+  - { method: "<java.lang.Class: java.lang.reflect.Constructor getDeclaredConstructor(java.lang.Class[])>", from: base, to: result }
+  - { method: "<java.util.Iterator: java.lang.Object next()>", from: base, to: result, type: from }
+  - { method: "<java.util.List: java.util.Iterator iterator()>", from: base, to: result }
+  - { method: "<java.util.Set: java.util.Iterator iterator()>", from: base, to: result, type: from }
+  - { method: "<java.util.Vector: java.lang.Object elementAt(int)>", from: base, to: result }
+  - { method: "<java.util.Vector: void insertElementAt(java.lang.Object,int)>", from: 0, to: base }
+  - { method: "<java.lang.Object: java.lang.Class getClass()>", from: base, to: result }
+  - { method: "<java.lang.Object: java.lang.Object clone()>", from: base, to: result }
+  - { method: "<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>", from: 0, to: result }
+  - { method: "<java.lang.Class: java.lang.reflect.Method[] getMethods()>", from: base, to: result }
+  - { method: "<java.lang.Class: java.lang.reflect.Method getDeclaredMethod(java.lang.String,java.lang.Class[])>", from: 0, to: result }
+  - { method: "<java.lang.Class: java.lang.reflect.Constructor getConstructor(java.lang.Class[])>", from: base, to: result }
+  - { method: "<java.lang.Class: java.lang.ClassLoader getClassLoader()>", from: base, to: result }
+  - { method: "<java.lang.ClassLoader: java.lang.Class defineClass(byte[],int,int)>", from: 0, to: result }
+  - { method: "<java.lang.ClassLoader: java.lang.Class defineClass(java.lang.String,byte[],int,int)>", from: 1, to: result }
+  - { method: "<java.lang.ClassLoader: java.lang.Class defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)>", from: 1, to: result }
+  - { method: "<java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>", from: 0, to: 2 }
+  - { method: "<java.beans.PropertyDescriptor: void <init>(java.lang.String,java.lang.reflect.Method,java.lang.reflect.Method)>", from: 1, to: base }
+  - { method: "<java.beans.PropertyDescriptor: void <init>(java.lang.String,java.lang.reflect.Method,java.lang.reflect.Method)>", from: 2, to: base }
+  - { method: "<java.beans.PropertyDescriptor: void <init>(java.lang.String,java.lang.Class,java.lang.String,java.lang.String)>", from: 2, to: base }
+  - { method: "<java.beans.PropertyDescriptor: void <init>(java.lang.Class,java.lang.String,java.lang.reflect.Method,java.lang.reflect.Method)>", from: 0, to: base }
+  - { method: "<java.beans.Introspector: java.beans.BeanInfo getBeanInfo(java.lang.Class)>", from: 0, to: result }
+  - { method: "<java.beans.Introspector: java.beans.BeanInfo getBeanInfo(java.lang.Class,java.lang.Class,int)>", from: 0, to: result }
+  - { method: "<java.beans.Introspector: java.beans.BeanInfo getBeanInfo()>", from: base, to: result }
+  - { method: "<java.beans.Introspector: java.beans.BeanInfo findExplicitBeanInfo(java.lang.Class)>", from: 0, to: result }
+  - { method: "<java.beans.Introspector: java.beans.PropertyDescriptor[] getTargetPropertyInfo()>", from: base, to: result }
+  - { method: "<java.lang.reflect.Method: java.lang.String getName()>", from: base, to: result }
+  - { method: "<java.util.List: java.lang.Object[] toArray(java.lang.Object[])>", from: base, to: 0 }
+  - { method: "<java.util.Collections: java.util.Set synchronizedSet(java.util.Set,java.lang.Object)>", from: 0, to: result, type: from }
+  - { method: "<java.util.Collections: java.util.List unmodifiableList(java.util.List)>", from: 0, to: result }
+  - { method: "<java.lang.System: java.lang.String getProperty(java.lang.String)>", from: 0, to: result }
+  - { method: "<java.util.UUID: java.lang.String toString()>", from: base, to: result }
+
+imitates:
+  - { method: "<java.lang.String: void getChars(int,int,char[],int)>", action: summary, value: [append:base->2] }
+  - { method: "<java.lang.String: void getChars(char[],int)>", action: summary, value: [append:base->0] }
+  - { method: "<java.lang.String: char charAt(int)>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: void getBytes(int,int,byte[],int)>", action: summary, value: [base->2] }
+  - { method: "<java.lang.String: byte[] getBytes()>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: byte[] getBytes(java.lang.String)>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: java.lang.String[] split(java.lang.String)>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: java.lang.String[] split(java.lang.String,int)>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: java.lang.String substring(int,int)>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: java.lang.String substring(int)>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: java.lang.String concat(java.lang.String)>", action: summary, value: [0->base,base->result] }
+  - { method: "<java.lang.String: java.lang.String toLowerCase()>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: java.lang.String toLowerCase(java.util.Locale)>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: java.lang.String toUpperCase()>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: java.lang.String toUpperCase(java.util.Locale)>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: java.lang.String trim()>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: void <init>(char[],int,int)>", action: summary, value: [0->base] }
+  - { method: "<java.lang.String: void <init>(char[])>", action: summary, value: [0->base] }
+  - { method: "<java.lang.String: void <init>(java.lang.String)>", action: summary, value: [0->base] }
+  - { method: "<java.lang.String: void <init>(java.lang.StringBuffer)>", action: summary, value: [0->base] }
+  - { method: "<java.lang.String: void <init>(java.lang.StringBuilder)>", action: summary, value: [0->base] }
+  - { method: "<java.lang.String: java.lang.String toString()>", action: summary, value: [base->result] }
+  - { method: "<java.lang.String: char[] toCharArray()>", action: summary, value: [base->result] }
+  - { method: "<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>", action: summary, value: [append:0->base,base->result] }
+  - { method: "<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.StringBuffer)>", action: summary, value: [append:0->base,base->result] }
+  - { method: "<java.lang.StringBuilder: java.lang.StringBuilder append(char)>", action: summary, value: [append:0->base,base->result] }
+  - { method: "<java.lang.StringBuilder: java.lang.StringBuilder append(int)>", action: summary, value: [base->result] }
+  - { method: "<java.lang.StringBuilder: void <init>(java.lang.String)>", action: summary, value: [ 0->base ] }
+  - { method: "<java.lang.StringBuilder: java.lang.String toString()>", action: summary, value: [ base->result ] }
+  - { method: "<java.lang.StringBuilder: java.lang.StringBuilder insert(int,java.lang.String)>", action: summary, value: [1->base,base->result] }
+  - { method: "<java.lang.StringBuilder: java.lang.StringBuilder reverse()>", action: summary, value: [base->result] }
+  - { method: "<java.lang.StringBuffer: void <init>(java.lang.String)>", action: summary, value: [ 0->base ] }
+  - { method: "<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>", action: summary, value: [append:0->base,base->result] }
+  - { method: "<java.lang.StringBuffer: java.lang.String toString()>", action: summary, value: [base->result] }
+  - { method: "<java.lang.StringBuffer: java.lang.String substring(int,int)>", action: summary, value: [base->result] }
+  - { method: "<java.lang.StringBuffer: java.lang.StringBuffer insert(int,java.lang.String)>", action: summary, value: [1->base,base->result] }
+  - { method: "<java.lang.StringBuffer: java.lang.StringBuffer reverse()>", action: summary, value: [base->result] }
+  - { method: "<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>", action: connect, jump: constructor, fromIdx: base, paramIdx: 0 }
+  - { method: "<java.lang.Class: java.lang.Class forName(java.lang.String)>", action: connect, jump: constructor, fromIdx: 0 }
+  - { method: "<java.lang.Class: java.lang.Class forName(java.lang.String,boolean,java.lang.ClassLoader)>", action: connect, jump: constructor, fromIdx: 0 }
+  - { method: "<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>", action: connect, jump: inference, fromIdx: base, recIdx: 0, paramIdx: 1 }
+  - { method: "<java.beans.PropertyDescriptor: java.lang.reflect.Method getReadMethod()>", action: connect, jump: get, fromIdx: base }
+  - { method: "<java.beans.PropertyDescriptor: java.lang.reflect.Method getWriteMethod()>", action: connect, jump: set, fromIdx: base }
+  - { method: "<java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>", action: connect, jump: run, fromIdx: 0 }
+  - { method: "<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>", action: polluteRec }
+  - { method: "<java.util.Set: boolean add(java.lang.Object)>", action: polluteRec }
+  - { method: "<java.util.Collection: boolean add(java.lang.Object)>", action: polluteRec }
+  - { method: "<java.util.List: boolean add(java.lang.Object)>", action: polluteRec }
+  - { method: "<java.lang.String: java.lang.String replace(char,char)>", action: replace }
+  - { method: "<java.lang.String: java.lang.String replaceFirst(java.lang.String,java.lang.String)>", action: replace }
+  - { method: "<java.lang.String: java.lang.String replaceAll(java.lang.String,java.lang.String)>", action: replace }
+
+ignores:
+  - { method: "<java.io.InputStream: int read()>" }
+  - { method: "<java.io.ObjectInputStream: void defaultReadObject()>" }
+  - { method: "<java.io.ObjectInputStream: int read()>" }
+  - { method: "<java.io.ObjectInputStream: int readInt()>" }
+  - { method: "<java.io.ObjectInputStream: short readShort()>" }
+  - { method: "<java.io.ObjectInputStream: int readUnsignedShort()>" }
+  - { method: "<java.io.ObjectInputStream: int skipBytes(int)>" }
+  - { method: "<java.io.ObjectInputStream: float readFloat()>" }
+  - { method: "<java.io.ObjectInputStream: double readDouble()>" }
+  - { method: "<java.io.ObjectInputStream: long readLong()>" }
+  - { method: "<java.io.ObjectInputStream: boolean readBoolean()>" }
+  - { method: "<java.io.ObjectInputStream: void close()>" }
+  - { method: "<java.io.ObjectOutputStream: void writeObject(java.lang.Object)>"}
+  - { method: "<java.io.ObjectInputStream$GetField: boolean get(java.lang.String,boolean)>" }
+  - { method: "<java.io.ObjectInputStream$GetField: float get(java.lang.String,float)>" }
+  - { method: "<java.io.ObjectInputStream$GetField: long get(java.lang.String,long)>" }
+  - { method: "<java.io.ObjectInputStream$GetField: int get(java.lang.String,int)>" }
+  - { method: "<java.io.ObjectInputStream$GetField: short get(java.lang.String,short)>" }
+  - { method: "<java.io.ObjectInputStream$GetField: double get(java.lang.String,double)>" }
+  - { method: "<java.io.ObjectStreamClass: void invokeReadObjectNoData(java.lang.Object)>"}
+  - { method: "<java.io.ObjectStreamClass: java.lang.Object invokeReadResolve(java.lang.Object)>"}
+  - { method: "<java.io.OutputStream: void close()>" }
+  - { method: "<java.io.DataInput: int readInt()>"}
+  - { method: "<java.io.DataInput: long readLong()>"}
+  - { method: "<java.io.DataInput: java.lang.String readUTF()>"}
+  - { method: "<java.io.DataInput: java.lang.String readLine()>"}
+  - { method: "<java.io.DataInput: short readShort()>"}
+  - { method: "<java.io.DataInput: byte readByte()>"}
+  - { method: "<java.util.Enumeration: java.lang.Object nextElement()>"}
+  - { method: "<java.util.Enumeration: java.lang.Object hasMoreElements()>"}
+  - { method: "<java.lang.String: java.lang.String toString()>" }
+  - { method: "<java.lang.String: int length()>" }
+  - { method: "<java.lang.StringBuilder: void <init>()>"}
+  - { method: "<java.util.Iterator: boolean hasNext()>"}
+  - { method: "<java.util.UUID: java.util.UUID randomUUID()>"}
+  - { method: "<sun.util.logging.PlatformLogger: sun.util.logging.PlatformLogger getLogger(java.lang.String)>" }
+  - { method: "<javax.swing.text.DefaultStyledDocument: void readObject(java.io.ObjectInputStream)>" }
+  - { method: "<java.security.BasicPermissionCollection: void readObject(java.io.ObjectInputStream)>" }
+  - { method: "<java.lang.System: java.lang.SecurityManager getSecurityManager()>" }
+  - { method: "<java.lang.SecurityManager: void checkRead(java.lang.String)>" }
+  - { method: "<java.util.HashMap: java.util.HashMap$Node[] resize()>" }
+  - { method: "<java.beans.PropertyChangeSupport: void readObject(java.io.ObjectInputStream)>"}
+  - { method: "<java.beans.VetoableChangeSupport: void readObject(java.io.ObjectInputStream)>"}
+  - { class: "java.lang.Object" }
+  - { class: "java.lang.Class" }
+  - { class: "java.lang.String" }
+  - { class: "sun.rmi.server.MarshalInputStream" }
+  - { class: "java.io.ObjectInputStream" }
+  - { class: "java.io.ObjectOutputStream" }
+  - { classMethod: "org.codehaus.groovy.antlr.parser.GroovyRecognizer" } # TODO fix parser
+  - { classMethod: "org.codehaus.groovy.antlr.java.JavaRecognizer" }
+  - { classMethod: "org.hibernate.hql.internal.antlr.HqlSqlBaseWalker"}
+  - { classMethod: "org.hibernate.hql.internal.antlr.SqlGeneratorBase"}
+  - { classMethod: "bsh.Parser" }
+  - { classMethod: "org.apache.el.parser.ELParser"}

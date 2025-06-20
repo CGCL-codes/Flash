@@ -1,0 +1,32 @@
+optionsFile: null
+printHelp: false
+classPath: []
+appClassPath:
+  - java-benchmarks/JDV/BasicDependency/
+  - java-benchmarks/JDV/target/BeanShell/
+inputClasses: []
+javaVersion: 8
+prependJVM: false
+allowPhantom: true
+worldBuilderClass: pascal.taie.frontend.soot.SootWorldBuilder
+outputDir: /flash/java-benchmarks/JDV/target/BeanShell
+preBuildIR: false
+worldCacheMode: false
+scope: ALL
+nativeModel: true
+planFile: null
+sources:
+  - "serializable" # serializable | method signature (eg, <org.yaml.snakeyaml.Yaml: java.lang.Object load(java.lang.String)>)
+filterNonSerializable: True
+GC_MAX_LEN: 12
+analyses:
+  method-summary:
+    priori-knowledge:java-benchmarks/JDV/priori-knowledge.yml
+GC_OUT: chains
+COLLECT_GC_INPROCESS: False
+GCGraph_COLLECT_TIME: 3
+SINK_MAX_TIME: 180
+LCS_THRESHOLD: 0.8
+onlyGenPlan: false
+keepResult:
+  - $KEEP-ALL
