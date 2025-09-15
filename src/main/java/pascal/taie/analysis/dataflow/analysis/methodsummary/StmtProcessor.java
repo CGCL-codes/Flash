@@ -84,6 +84,16 @@ public class StmtProcessor {
             "java.util.Iterator"
     );
 
+    private static Set<String> primitiveClasses = Set.of(
+            "java.lang.Long",
+            "java.lang.Integer",
+            "java.lang.Float",
+            "java.lang.Double",
+            "java.lang.Byte",
+            "java.lang.Short",
+            "java.lang.Boolean"
+    );
+
     public StmtProcessor(StackManger stackManger, CSCallGraph callGraph, PointerFlowGraph pointerFlowGraph, HeapModel heapModel, CSManager csManager, Context context, CompositePlugin plugin) {
         this.drivenMap = new ContrFact();
         this.visitor = new Visitor();
@@ -316,9 +326,10 @@ public class StmtProcessor {
             InstanceOfExp exp = stmt.getRValue();
             CSVar checkedVar = csManager.getCSVar(context, exp.getValue());
             Contr checkedContr = getContr(checkedVar);
-            if (ContrUtil.isControllable(checkedContr)) {
+            ReferenceType checkedType = exp.getCheckedType();
+            if (ContrUtil.isControllable(checkedContr) && !isIgnored(checkedType)) {
                 CSVar retVar = csManager.getCSVar(context, stmt.getLValue());
-                stackManger.putInstanceOfInfo(retVar, checkedVar, exp.getCheckedType());
+                stackManger.putInstanceOfInfo(retVar, checkedVar, checkedType);
             }
             return null;
         }
@@ -524,7 +535,7 @@ public class StmtProcessor {
     }
 
     private boolean isIgnored(Type type) {
-        return (type instanceof PrimitiveType && !(type instanceof CharType)) || type instanceof NullType || (type instanceof ClassType ct && ct.getName().equals("java.lang.Short"));
+        return (type instanceof PrimitiveType && !(type instanceof CharType)) || type instanceof NullType || (type instanceof ClassType ct && primitiveClasses.contains(ct.getName()));
     }
 
     private boolean isIgnored(JMethod method) {
