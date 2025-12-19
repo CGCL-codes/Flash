@@ -208,8 +208,9 @@ public class Main {
 
     private static void getAllSuperclassesOf(JClass c, Set<JClass> ret) {
         JClass superClz = c.getSuperClass();
-        if (superClz != null) {
+        while (superClz != null) {
             ret.add(superClz);
+            superClz = superClz.getSuperClass();
         }
         c.getInterfaces().forEach(i -> ret.add(i));
     }
